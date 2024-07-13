@@ -1,0 +1,115 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Project01.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%:Page.Title%>Hunter|Gamers</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="Img/Logo.png" rel="shortcut icon" type="image/x-icon" />
+
+    <style type="text/css">
+        .auto-style1 {
+            width: 42px;
+            height: 40px;
+        }
+        .auto-style2 {
+            width: 43px;
+            height: 41px;
+        }
+        body
+        {
+           background-color:gray;
+           background-image:url(/img/background1.jpg);
+           background-repeat:no-repeat;
+           background-size:cover;
+              
+        }
+        .bg-transparent-custom 
+        {
+           /* Back color with 50% opasioty*/
+            background-color: rgba(0, 0, 0, 0.6); 
+           
+        }
+        .footer_style 
+        {
+            font-size:15px ; 
+            text-align:center ;
+            background-color:rgba(0, 0, 0, 0.6) ;
+            color:white;
+            width:100%; 
+        }
+    </style>
+
+</head>
+    <%-- ------------------------------------------------------------------------------------------------------------------------------------------ --%>
+<body >
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-transparent-custom">
+            <div class="container">
+      <%-- img --%><image src="Img/GAMER.gif" width="100px"></image>&nbsp
+                <a class="navbar-brand" runat="server" href="~/Default.aspx"><b style="color:red; font-size:25px">HUNTER | GAMERS</b></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="https://www.playstation.com/en-in/ps5/">Sony PS5</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="https://www.rockstargames.com/">Rockstar Games</a></li>
+                     </ul>
+                   <%-- <ul class="navbar-nav flex-grow-1"style="justify-content:end">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/cart.aspx"><img src="Img/icons8-cart-64.png" class="auto-style1" /></a></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/logout.aspx"> <img src="Img/icons8-logout-64.png" class="auto-style2" /> </a></li>
+                    </ul>--%>
+                </div>
+            </div>
+        </nav>
+        <div class="container body-content">
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <hr />
+            <div class="footer_style">
+                 <footer>
+                     <p>&copy; <%: DateTime.Now.Year %> <b style="color:red">HUTER GAMERS.</b> </p>
+                 </footer>
+            </div>
+           
+        </div>
+    </form>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+</body>
+</html>

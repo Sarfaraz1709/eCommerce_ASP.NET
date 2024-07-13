@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="usermasterpage.master.cs" Inherits="Project01.usermasterpage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+.navbar {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+        .auto-style3 {
+            width: 45px;
+            height: 43px;
+        }
+        .auto-style4 {
+            width: 45px;
+            height: 48px;
+        }
+        .auto-style5 {
+            color: #FFFFFF;
+            font-family: "Times New Roman", Times, serif;
+            text-shadow:1px 4px 8px;
+        }
+        .auto-style6 {
+            color: #FF3300;
+            font-weight: bold;
+            font-family: "Times New Roman";
+        }
+    </style>
+
+<nav class="navbar">
+  <strong>
+    &nbsp;&nbsp;&nbsp;
+    <asp:Button ID="Button1" runat="server" Text="Edit Profile" OnClick="Button1_Click" 
+        style=" font-weight: bold ; border:2px solid white;border-radius:10px ;Width:155px;"/>
+  </strong> 
+
+    <h5 class="auto-style5"> <span><strong>Welcome  <asp:Label ID="Label1" runat="server" Text="" CssClass="auto-style6"></asp:Label></strong></span> </h5>
+  
+    <div style="display:flex">
+      <a class="nav-link" runat="server" href="~/viewcart.aspx">
+        <img src="Img/icons8-cart-64.png" class="auto-style4" />
+      </a>
+    &nbsp;&nbsp;&nbsp;
+      <a class="nav-link" runat="server" href="~/Default.aspx">
+        <img src="Img/icons8-logout-64.png" class="auto-style3" />
+      </a>
+    &nbsp;&nbsp;&nbsp;
+  </div>
+
+</nav>
+ <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" ></asp:ContentPlaceHolder>
+</asp:Content>

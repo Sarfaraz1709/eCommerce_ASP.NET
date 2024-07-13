@@ -1,0 +1,188 @@
+﻿Site Master > Add Nav bar & footer  
+Default.aspx > Insert a Corousel > Insert A lOGIN Page > and a Register Link For Signup 
+
+>>>>>>>>>>>>>>>>>--------SIGNUP------------------------
+
+Create Database in SQL Server > Games > Add Table signup
+Create A Signup page > select Site.master > Add required Fields > in signup.aspx.cs > which will save the data in SQL Server
+
+ public partial class signup : System.Web.UI.Page
+    {
+        string strconnect = "server=.;database=Games;integrated security=true;"; //Give a Connection String location to dataBase
+        SqlConnection con = null;// Give null to SqlConnection. 
+        SqlCommand cmd = null;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Save Button 
+                con = new SqlConnection(strconnect);// Making a Connection 
+                string query = "insert into signup (username,userpassword,gender,mobile,role) values(@un,@upass,@gen,@mob,@r)";
+
+                cmd = new SqlCommand(query, con);//Giving written Query and Connection to SQLCommand.
+
+                //Giving Parameters to Query 
+                cmd.Parameters.AddWithValue("@un", TextBox1.Text);
+                cmd.Parameters.AddWithValue("@upass", TextBox2.Text);
+                string gender = null;
+                if (RadioButton1.Checked)
+                {
+                    gender = "male";
+                }
+                else if (RadioButton2.Checked)
+                {
+                    gender = "female";
+                }
+                else if (RadioButton3.Checked)
+                {
+                    gender = "other";
+                }
+                else { Label1.Text = "Plese Select Gender"; }
+                cmd.Parameters.AddWithValue("@gen", gender);
+                cmd.Parameters.AddWithValue("@mob", TextBox3.Text);
+                string role = null;
+                if (RadioButton4.Checked) 
+                {
+                    role = "admin";
+                }
+                if (RadioButton5.Checked)
+                {
+                    role = "user";
+                }
+                cmd.Parameters.AddWithValue("@r", role);
+                con.Open(); // open Connection 
+                cmd.ExecuteNonQuery(); // Execute the Command
+      
+                //Clearingup
+                TextBox1.Text = String.Empty;
+                TextBox2.Text = String.Empty;
+                TextBox3.Text = String.Empty;
+                RadioButton1.Checked = false;
+                RadioButton2.Checked = false;
+                RadioButton3.Checked = false;
+                RadioButton4.Checked = false;
+                RadioButton5.Checked = false;   
+            }
+            catch (Exception ex)
+            {
+                Label1.Text = "Please Enter Your Details!!!!!!";
+            }
+            finally 
+            {
+               
+                con.Close(); // close The Connection
+                Response.Redirect("Default.aspx");
+
+            }
+
+        }
+
+        public void Button2_Click(object sender, EventArgs e)
+        {
+            clear();
+
+        }
+        public void clear() 
+        {
+            //clear button
+            TextBox1.Text = String.Empty;
+            TextBox2.Text = String.Empty;
+            TextBox3.Text = String.Empty;
+            RadioButton1.Checked = false;
+            RadioButton2.Checked = false;
+            RadioButton3.Checked = false;
+            Label1.Text = String.Empty;
+            TextBox1.Focus();
+        }
+
+    }
+>>>>>>>>>>---------------------SIGNIN------------------------
+Default.aspx > default.aspxc.cs > 
+  
+ public partial class _Default : Page
+    {
+        string str = "server=.;database=Games;integrated security=true;";
+        SqlConnection conn = null;
+        SqlCommand cmd = null;
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            // Login Button Click.
+            try
+            {
+                conn = new SqlConnection(str);
+                conn.Open();
+                string query = "Select * from signup where username = @un and userpassword = @up";
+                cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@un", TextBox1.Text);
+                cmd.Parameters.AddWithValue("@up", TextBox2.Text);
+                SqlDataReader dr = cmd.ExecuteReader(); // Reads the Data from SqlServer and store in any variable
+                string role = null;
+                string uname = null;
+                string pwsd = null;
+                if (dr.Read())
+                {
+                    role = dr["role"].ToString(); // Saved role of SQL will be stored in role
+                    uname = dr["username"].ToString(); // Saved name of SQL will be stored in uname
+                    pwsd = dr["userpassword"].ToString();
+          
+                                                    Session["username"] = uname; // the username will be stored in session that can be used for displaying his/her Name
+                    if (TextBox1.Text == uname && TextBox2.Text == pwsd) 
+                    {
+                        if (role == "user")
+                        {
+                            Response.Redirect("userDB.aspx");
+                        }
+                        else if (role == "admin")
+                        {
+                            Response.Redirect("adminDB.aspx");
+                        }
+                    }
+                    else if (TextBox1.Text != uname || TextBox2.Text != pwsd)
+                    {
+                        Label1.Text = "Invalid Username or Password !!";
+                    }
+
+                    dr.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Label1.Text = "Error : " + ex.Message;
+            }
+            finally 
+            {
+                conn.Close();
+            }
+           
+        }
+------------------------------------------------------------------------------------------------------------
+USER MASTER PAGE FOR ADMIN
+------------------------------------------------------------------------------------------------------------
+Create a Nested MasterPage > usermasterpage.master > Select Site.master > ass fields like > Editprofile , lOGOUT , cart , Welcome
+In usermasterPage > 
+ public partial class usermasterpage : System.Web.UI.MasterPage
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            string uname = Session["username"].ToString();   // will display the name 
+            Label1.Text = uname;
+       
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("edtprofile.aspx");
+        }
+    }
+------------------>Edit Profile---->>>
+
+
+
+

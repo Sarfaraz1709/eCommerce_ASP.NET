@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminmasterPage.master.cs" Inherits="Project01.AdminmasterPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .W1 
+        {
+          color: #FFFFFF;
+          font-family: "Times New Roman", Times, serif;
+          text-shadow:1px 4px 8px;
+        }
+        .W2 
+        {
+             color: #FF3300;
+             font-weight: bold;
+             font-family: "Times New Roman";
+        }
+        .auto-style3 {
+            color: #FFFFFF;
+            font-family: "Times New Roman", Times, serif;
+            text-shadow: 1px 4px 8px;
+            text-align: center;
+        }
+        .navbar 
+        {
+            justify-content:left;
+        }
+
+        </style>
+
+    <nav class="navbar">
+        &nbsp;&nbsp;
+        <asp:Button ID="Button1" runat="server" Text="Edit Profile" Width="172px" style="font-weight: bold; border:2px solid white;border-radius:10px;" OnClick="Button1_Click"/>
+        &nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button2" runat="server" Text="Add Products" Width="172px" style="font-weight: bold; border:2px solid white;border-radius:10px;" OnClick="Button2_Click"/>
+        &nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button3" runat="server" Text="View Orders" Width="172px" style="font-weight: bold; border:2px solid white;border-radius:10px;" OnClick="Button3_Click"/>
+    </nav>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
